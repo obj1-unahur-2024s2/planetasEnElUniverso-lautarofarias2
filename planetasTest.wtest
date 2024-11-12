@@ -1,0 +1,48 @@
+import planetas.*
+
+describe "Un planeta con cuatro personas como habitantes, dos murallas y un museo" {
+
+  const p1 = new Persona(edad=18)
+  const p2 = new Persona(edad=26)
+  const p3 = new Persona(edad=8)
+  const p4 = new Persona(edad=66, monedas = 100)
+
+  const m1 = new Muralla(longitud=1000)
+  const m2 = new Muralla(longitud=1500)
+
+  const c1 = new Museo(superficieCubierta = 1200, indiceDeImportancia=3)
+
+  const planeta1 = new Planeta(personas = [p1,p2,p3,p4], construcciones = [m1,m2,c1])
+
+
+  const p5 = new Persona(edad=19)
+  const p6 = new Persona(edad=6)
+  const p7 = new Persona(edad=22)
+  const p8 = new Persona(edad=4, monedas = 10)
+
+  const m3 = new Muralla(longitud=5)
+  const m4 = new Muralla(longitud=1)
+
+  const c2 = new Museo(superficieCubierta = 20, indiceDeImportancia=1)
+
+  const planeta2 = new Planeta(personas = [p5,p6,p7,p8], construcciones = [m3,m4,c2])
+  test "La delegación diplomática está formada por tres de ellas" {
+    assert.equals(3, planeta1.delegacionDiplomatica().size())
+  }
+  test "Es valioso" {
+    assert.that(planeta1.esValioso())
+  }
+  test "La delegación diplomática está formada por dos de ellas" {
+    assert.equals(2, planeta2.delegacionDiplomatica().size())
+  }
+  test "No es valioso" {
+    assert.notThat(planeta2.esValioso())
+  }
+  test "Gastan monedas y cumplen anios los habitantes" {
+    p1.gastarMonedas(10)
+    p4.gastarMonedas(100)
+    p4.cumplirAnios()
+
+    assert.equals(2, planeta1.delegacionDiplomatica().size())
+  }
+}
